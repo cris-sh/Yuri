@@ -1913,27 +1913,6 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                             this.gameSettings.showLagometer = GuiScreen.isAltKeyDown();
                         }
 
-                        if (this.gameSettings.keyBindTogglePerspective.isPressed())
-                        {
-                            ++this.gameSettings.thirdPersonView;
-
-                            if (this.gameSettings.thirdPersonView > 2)
-                            {
-                                this.gameSettings.thirdPersonView = 0;
-                            }
-
-                            if (this.gameSettings.thirdPersonView == 0)
-                            {
-                                this.entityRenderer.loadEntityShader(this.getRenderViewEntity());
-                            }
-                            else if (this.gameSettings.thirdPersonView == 1)
-                            {
-                                this.entityRenderer.loadEntityShader((Entity)null);
-                            }
-
-                            this.renderGlobal.setDisplayListEntitiesDirty();
-                        }
-
                         if (this.gameSettings.keyBindSmoothCamera.isPressed())
                         {
                             this.gameSettings.smoothCamera = !this.gameSettings.smoothCamera;
@@ -1956,6 +1935,27 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                         }
                     }
                 }
+            }
+
+            if (this.currentScreen == null && this.gameSettings.keyBindTogglePerspective.isPressed())
+            {
+                ++this.gameSettings.thirdPersonView;
+
+                if (this.gameSettings.thirdPersonView > 2)
+                {
+                    this.gameSettings.thirdPersonView = 0;
+                }
+
+                if (this.gameSettings.thirdPersonView == 0)
+                {
+                    this.entityRenderer.loadEntityShader(this.getRenderViewEntity());
+                }
+                else if (this.gameSettings.thirdPersonView == 1)
+                {
+                    this.entityRenderer.loadEntityShader((Entity)null);
+                }
+
+                this.renderGlobal.setDisplayListEntitiesDirty();
             }
 
             for (int l = 0; l < 9; ++l)
